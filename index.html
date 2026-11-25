@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Notruf KOSMOS-4</title>
+<style>
+:root{--bg:#04070d;--pan:#0c141f;--line:#1c3047;--g:#39ff88;--a:#ffc857;--r:#ff5470;--t:#e6eef7;--m:#8da2b8}
+*{box-sizing:border-box}
+html,body{margin:0;background:radial-gradient(circle at 20% 10%,#0b1a2e,#04070d 60%);color:var(--t);font:18px/1.5 ui-monospace,Menlo,Consolas,monospace;min-height:100vh}
+#app{max-width:880px;margin:0 auto;padding:16px;padding-top:max(16px,env(safe-area-inset-top));min-height:100vh}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+h1{font-size:20px;margin:4px 0;color:var(--g);cursor:pointer;user-select:none;letter-spacing:.05em}
+h2{margin:6px 0}
+.chip{border:1px solid var(--line);border-radius:999px;padding:2px 12px;color:var(--a);font-size:15px;display:inline-block}
+.chip.lowo{color:var(--r);border-color:var(--r);animation:bk 1s steps(2) infinite}
+@keyframes bk{50%{opacity:.3}}
+.hide{display:none!important}
+.term{background:#02060a;border:1px solid var(--g);border-radius:10px;padding:16px;box-shadow:0 0 24px #39ff8830;color:var(--g);min-height:280px}
+.term .l{margin:4px 0;white-space:pre-wrap}.term .r{color:var(--r)}.term .a{color:var(--a)}
+.term .l{animation:fk 4s infinite}
+@keyframes fk{0%,90%,100%{opacity:1}92%{opacity:.15}94%{opacity:.9}96%{opacity:.05}}
+input{font:700 22px ui-monospace,Menlo,monospace;background:#02060a;color:var(--g);border:1px solid var(--g);border-radius:8px;padding:10px;width:min(240px,100%)}
+input[type=checkbox]{width:22px;height:22px;vertical-align:middle}
+button{font:700 18px ui-monospace,Menlo,monospace;padding:11px 20px;border-radius:8px;border:1px solid var(--g);background:#0b2a1a;color:var(--g);cursor:pointer}
+button:disabled{opacity:.35}
+.how{background:var(--pan);border:1px solid var(--a);border-radius:12px;padding:12px 16px;margin:10px 0;font-size:16px}
+.how b{color:var(--a)}
+.tk{background:var(--pan);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
+.tk.lk{opacity:.4}.tk.ok{border-color:var(--g)}
+.th{color:var(--a);font-size:16px}.gc{color:var(--g);margin-left:8px}
+.q{font-size:22px;margin:8px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+#fin{background:var(--pan);border:1px solid var(--a);border-radius:12px;padding:12px 16px;margin:14px 0}
+#msg,#rmsg{min-height:1.5em;color:var(--r)}
+.temp{height:14px;border-radius:7px;background:#1a2733;overflow:hidden;margin:6px 0}
+.temp i{display:block;height:100%;background:linear-gradient(90deg,var(--r),var(--a),var(--g));transition:width .8s}
+.cap{background:#0f1d2b;border:1px solid var(--a);border-radius:10px;padding:14px 18px;margin:10px 0}
+.big{font-size:54px;text-align:center}
+.r{color:var(--r)}.a{color:var(--a)}
+.ov2{position:fixed;inset:0;z-index:90;background:#0008;display:flex;flex-direction:column;justify-content:center;padding:20px;color:var(--r);overflow:hidden;font-size:16px}
+.ov2.ok{color:var(--g);background:#000d}
+.hkt{font-size:30px;text-align:center;font-weight:700;margin-bottom:12px;animation:gl .4s infinite}
+.hkm{text-align:center;font-size:20px;margin-top:14px;color:var(--a)}
+#hkl{white-space:pre-wrap;word-break:break-all;line-height:1.4}
+#snd{position:fixed;right:10px;bottom:10px;z-index:95;padding:6px 12px;font-size:20px}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;background:repeating-linear-gradient(0deg,#0000 0 2px,#0000002e 3px)}
+.bar{position:fixed;left:0;right:0;height:5px;background:#39ff8833;z-index:98;pointer-events:none;animation:bar 5s linear infinite}
+@keyframes bar{from{top:-5px}to{top:100%}}
+@keyframes fl1{0%,94%,100%{transform:none;filter:none}96%{transform:translateX(-4px);filter:hue-rotate(40deg)}}
+@keyframes fl2{0%,88%,100%{transform:none;filter:none}90%{transform:translate(-7px,1px) skewX(4deg);filter:hue-rotate(120deg) saturate(2)}93%{transform:translate(6px,-1px);filter:invert(.15)}}
+@keyframes gl{0%,100%{transform:none;text-shadow:none}20%{transform:translate(-8px,2px) skewX(6deg);text-shadow:3px 0 #f0f,-3px 0 #0ff}40%{transform:translate(8px,-2px) skewX(-6deg)}60%{transform:translate(-5px,0);text-shadow:-3px 0 #f0f,3px 0 #0ff}80%{transform:translate(5px,2px)}}
+body.l1 #app{animation:fl1 6s infinite}
+body.l2 #app{animation:fl2 3s infinite}
+body.dmg #app{animation:fl2 1.6s infinite}
+body.hk #app{animation:gl .35s infinite}
+body.gl #app{animation:gl .5s 3}
+body.gl{pointer-events:none}
+h1.gt,.term.gt{text-shadow:3px 0 #f0f,-3px 0 #0ff;transform:translateX(3px)}
+</style></head><body>
+<div class="bar"></div>
+<button id="snd" class="hide">🔊</button>
+<div id="hk" class="ov2 hide"></div>
+<div id="app">
+ <div class="top"><h1 id="h">▌KOSMOS-4 // NOTRUF</h1><span><span class="chip hide" id="o2"></span> <span class="chip hide" id="clock"></span></span></div>
+
+ <div id="intro"><div class="term" id="term"><button id="tap">▶ Verbindung starten (Ton an)</button></div>
+  <p id="ask" class="hide"><span style="color:var(--g)">&gt; Wählt eure Crew:</span><br><span id="teams"></span></p></div>
+
+ <div id="main" class="hide">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><span class="chip" id="found"></span><span class="chip">Versuche: <b id="left">3</b></span></div>
+  <div class="how"><b>So geht's:</b><br>1. Löst die 10 Systeme der Reihe nach. Nehmt Stift und Papier zur Hilfe!<br>2. Nehmt von jedem Ergebnis nur die <b>letzte Ziffer</b>. Beispiel: 72 → 2.<br>3. Setzt die 10 Ziffern der Reihe nach zum Notfallcode zusammen.<br>4. Der Computer sagt nicht, ob ein Ergebnis stimmt. Rechnet gemeinsam nach!</div>
+  <div id="tasks"></div>
+  <div id="fin"></div>
+ </div>
+
+ <div id="repair" class="hide"></div>
+
+ <div id="win" class="hide"><div class="big">🚀🛸✨</div><h2 id="wt" style="color:var(--g)"></h2><p>Der Notfallcode stimmt. Die Rettungskapsel öffnet sich!</p><div class="cap" id="cap"></div><p class="chip" id="ws"></p><p>V0ID: „Nein … mein schöner Plan!“<br><br>Geht leise zu eurem Lehrer und flüstert ihm den Namen der Kapsel und der geretteten Person zu. Verratet es keinem anderen Team!</p></div>
+</div>
+
+<script>
+const MAX=3,KEY='kosmos4-v2';
+const TEAMS=[['🚀','Crew Orion','ALPHA','Kommandantin Mira'],['🌟','Crew Nova','BETA','Pilot Jonas'],['☄️','Crew Komet','GAMMA','Ingenieurin Lea'],['🛰️','Crew Pulsar','DELTA','Bordarzt Tim']];
+const SYS=['Triebwerk','Schwerkraft','Funkanlage','Navigation','Solarpanel','Schleuse','Kühlsystem','Antenne'];
+const SET=[
+ {p:[[23,4],[37,6],[48,7],[67,8],[76,9],[14,12],[23,15],[32,18]],w:[[45,7],[27,14]]},
+ {p:[[34,7],[56,4],[29,6],[78,6],[87,5],[15,13],[24,16],[21,19]],w:[[38,9],[33,16]]},
+ {p:[[26,3],[47,8],[53,7],[69,4],[88,7],[16,17],[22,23],[18,21]],w:[[39,6],[34,13]]},
+ {p:[[42,6],[59,3],[64,7],[73,6],[89,9],[13,17],[27,16],[19,23]],w:[[36,8],[29,13]]}
+];
+const tasks=t=>{const S=SET[t];
+ return S.p.map(([a,b],i)=>({n:SYS[i],q:`${a} mal ${b}`,ans:a*b})).concat([
+  {n:'Sauerstoff-Module',q:`Die Station hat ${S.w[0][0]} Module. In jedem Modul stehen ${S.w[0][1]} Sauerstofftanks. Wie viele Tanks sind das?`,ans:S.w[0][0]*S.w[0][1],w:1},
+  {n:'Energiekristalle',q:`Im Lager liegen ${S.w[1][0]} Kisten mit je ${S.w[1][1]} Energiekristallen. Wie viele Kristalle sind das?`,ans:S.w[1][0]*S.w[1][1],w:1}])};
+const code=t=>tasks(t).map(k=>k.ans%10).join('');
+const MSG=['V0ID: „Falsch! Der Hüllendruck sinkt … Noch 2 Versuche!“','V0ID: „ALARM! Die Hülle bricht! Nur noch EIN Versuch!“'];
+
+let st={team:0,name:'',t0:0,tries:MAX,wrongs:0,done:false,time:0,mode:'play',ans:[],sent:[],rq:null,rn:0,msg:''},clicks=0;
+try{Object.assign(st,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+if(st.mode==='hack')st.mode='repair';
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const $=s=>document.querySelector(s),show=(s,on)=>$(s).classList.toggle('hide',!on);
+const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+
+/* ---------- Aufgaben ---------- */
+function render(){
+ const T=tasks(st.team);
+ $('#tasks').innerHTML=T.map((k,i)=>{const open=i===0||st.sent[i-1],sent=st.sent[i];
+  return `<div class="tk${open?'':' lk'}${sent?' ok':''}"><div class="th">${open?'':'🔒 '}SYSTEM ${i+1}: ${k.n}${sent?'<span class="gc">✓ Datenpaket empfangen</span>':''}</div>${open?`<div class="q">${k.q}${k.w?'':' = ?'}</div><div class="row"><input inputmode="numeric" pattern="[0-9]*" maxlength="4" data-i="${i}" value="${st.ans[i]||''}" placeholder="Ergebnis"><button data-s="${i}">${sent?'Neu senden':'Senden'}</button></div>`:''}</div>`}).join('');
+ const all=T.every((k,i)=>st.sent[i]);
+ $('#fin').innerHTML=all?`<h2 style="color:var(--a)">🔐 Notfallcode</h2><p>Nehmt von jedem der 10 Ergebnisse nur die <b>letzte Ziffer</b> und schreibt sie der Reihe nach auf.</p><p><label><input type="checkbox" id="sure"> Wir haben alles zusammen nachgerechnet.</label></p><p><input id="cin" maxlength="10" inputmode="numeric" placeholder="··········" style="letter-spacing:.25em;text-align:center;width:min(340px,100%)"></p><p><button id="go" disabled>Rettungskapsel öffnen</button></p><div id="msg">${st.msg||''}</div>`:`<p style="color:var(--m);margin:0">🔒 Der Notfallcode wird freigeschaltet, sobald alle 10 Systeme Daten gesendet haben.</p>`;
+ $('#found').textContent='Systeme gesendet: '+st.sent.filter(Boolean).length+' / 10';
+ $('#left').textContent=Math.max(0,st.tries);
+}
+function send(i){
+ const inp=document.querySelector(`#tasks input[data-i="${i}"]`);if(!inp)return;
+ const v=(inp.value||'').replace(/\D/g,'');if(!v){inp.focus();return}
+ st.ans[i]=v;st.sent[i]=true;save();sfx.ping();render();
+ const nx=document.querySelector(`#tasks input[data-i="${i+1}"]`);if(nx)nx.focus();
+}
+$('#tasks').addEventListener('input',e=>{const i=e.target.dataset.i;if(i!=null){st.ans[+i]=e.target.value.replace(/\D/g,'');save()}});
+$('#tasks').addEventListener('click',e=>{const b=e.target.closest('button[data-s]');if(b)send(+b.dataset.s)});
+$('#tasks').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.i!=null)send(+e.target.dataset.i)});
+const upd=()=>{const g=$('#go');if(g)g.disabled=!($('#sure').checked&&/^\d{10}$/.test($('#cin').value.trim()))};
+$('#fin').addEventListener('input',upd);$('#fin').addEventListener('change',upd);
+$('#fin').addEventListener('click',e=>{if(e.target.id==='go')tryCode()});
+
+function flash(){document.body.classList.add('gl');gLines(5);setTimeout(()=>document.body.classList.remove('gl'),1600)}
+function tryCode(){
+ const v=$('#cin').value.trim();
+ if(v===code(st.team)){sfx.win();st.done=true;st.time=Math.floor((Date.now()-st.t0)/1000);save();view();return}
+ st.tries--;st.wrongs++;sfx.wrong();
+ if(st.tries<=0){st.msg='';save();hack();return}
+ st.msg=MSG[st.tries===2?0:1];save();render();lvl();flash();
+}
+
+/* ---------- Hack & Reparatur ---------- */
+const gLines=n=>{for(let i=0;i<n;i++){const e=document.createElement('div'),y=Math.random()*100,c=['#39ff88','#0ff','#f0f'][i%3];e.style.cssText=`position:fixed;left:0;right:0;top:${y}%;height:${1+Math.random()*3}px;background:${c};opacity:.8;z-index:97;pointer-events:none;box-shadow:0 0 8px ${c}`;document.body.appendChild(e);let k=0;const t=setInterval(()=>{k++;e.style.left=(Math.random()*40-20)+'%';e.style.right=(Math.random()*40-20)+'%';e.style.top=(y+Math.random()*6-3)+'%';e.style.opacity=Math.random()<.3?.1:.8;if(k>8){clearInterval(t);e.remove()}},70)}};
+let scr,scrN=[];
+function scrOn(){scrN=[];const w=document.createTreeWalker($('#app'),NodeFilter.SHOW_TEXT);while(w.nextNode()){const n=w.currentNode;if(n.nodeValue.trim())scrN.push([n,n.nodeValue])}
+ scr=setInterval(()=>scrN.forEach(([n,o])=>{n.nodeValue=Math.random()<.6?[...o].map(c=>/\s/.test(c)||Math.random()>.3?c:'▓▒░#@%&$'[Math.random()*8|0]).join(''):o}),110)}
+function scrOff(){clearInterval(scr);scrN.forEach(([n,o])=>n.nodeValue=o);scrN=[]}
+function hack(){
+ sfx.halt();sfx.alarm();st.mode='hack';save();
+ const h=$('#hk');h.className='ov2';
+ h.innerHTML='<div class="hkt">⚠ SYSTEM CORRUPTED ⚠</div><div id="hkl"></div><div class="hkm">V0ID: „Zu spät, Crew. KOSMOS-4 gehört jetzt mir!“</div>';
+ document.body.classList.add('hk');scrOn();
+ const bad=['HÜLLE ✗','SAUERSTOFF ✗','FUNK ✗','KERN ✗','SCHWERKRAFT ✗','NAVIGATION ✗'];let k=0;
+ const ti=setInterval(()=>{const l=document.createElement('div');l.textContent='ERR 0x'+Math.random().toString(16).slice(2,8).toUpperCase()+' '+bad[k%6]+' '+'▒░▓#@%'.repeat(3);$('#hkl').appendChild(l);while($('#hkl').children.length>14)$('#hkl').firstChild.remove();k++;if(k%12===0)gLines(6)},120);
+ setTimeout(()=>{clearInterval(ti);scrOff();document.body.classList.remove('hk');show('#hk',0);st.mode='repair';st.rq=null;save();view();sfx.setBoost(30);sfx.race(st.t0)},7500);
+}
+function mkRep(){const s=[];while(s.length<4){const a=12+(Math.random()*18|0),b=3+(Math.random()*7|0);if(!s.some(([x,y])=>x*y===a*b))s.push([a,b])}st.rq=s;st.rn=0;save()}
+function renderRep(){
+ if(!st.rq)mkRep();const n=st.rn,p=n*25;
+ $('#repair').innerHTML=`<h2 style="color:var(--r)">🛠 NOTFALL-REPARATUR</h2><p>V0ID hat KOSMOS-4 gehackt! Repariert die 4 Module, damit das System neu starten kann.</p><div class="temp"><i style="width:${p}%"></i></div><p class="a">Reparatur: ${p}%</p>${n<4?`<div class="tk"><div class="th">MODUL ${n+1} / 4</div><div class="q">${st.rq[n][0]} mal ${st.rq[n][1]} = ?</div><div class="row"><input id="rin" inputmode="numeric" maxlength="3" placeholder="Ergebnis"><button id="rgo">Reparieren</button></div><div id="rmsg"></div></div>`:''}`;
+}
+function repGo(){
+ const inp=$('#rin');if(!inp||!inp.value)return;
+ const [a,b]=st.rq[st.rn];
+ if(+inp.value===a*b){sfx.ok();st.rn++;save();if(st.rn>=4){renderRep();boot()}else renderRep()}
+ else{sfx.bad();$('#rmsg').textContent='✗ Modul instabil! Rechnet noch einmal.';inp.value='';document.body.classList.add('gl');setTimeout(()=>document.body.classList.remove('gl'),1600)}
+}
+$('#repair').addEventListener('click',e=>{if(e.target.id==='rgo')repGo()});
+$('#repair').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='rin')repGo()});
+function boot(){
+ sfx.halt();sfx.fix();
+ const h=$('#hk');h.className='ov2 ok';h.innerHTML='<div class="hkt" style="color:var(--g);animation:none">SYSTEM NEUSTART</div><div id="hkl"></div>';
+ document.body.classList.remove('dmg');
+ const L2=['> Reparatur abgeschlossen: 100%','> Fremdzugriff blockiert','> Bordcomputer: ONLINE','> Funk: ONLINE','> Notstrom aktiviert: 1 Versuch','> KOSMOS-4 läuft wieder!'];
+ L2.forEach((t,i)=>setTimeout(()=>{$('#hkl').innerHTML+='<div>'+t+'</div>';sfx.crack()},500+i*650));
+ setTimeout(()=>{show('#hk',0);st.mode='play';st.tries=1;st.rq=null;st.msg='V0ID: „Das war knapp … aber ihr habt nur noch EINEN Versuch!“';save();view();sfx.setBoost(0);sfx.race(st.t0)},500+L2.length*650+600);
+}
+
+/* ---------- View ---------- */
+function lvl(){const b=document.body.classList,pl=st.mode==='play'&&!st.done&&st.t0>0;
+ b.toggle('dmg',st.mode==='repair'&&!st.done);b.toggle('l1',pl&&st.tries===2);b.toggle('l2',pl&&st.tries===1)}
+function view(){
+ const s=st.t0>0;
+ show('#intro',!s);show('#main',s&&!st.done&&st.mode==='play');show('#repair',s&&!st.done&&st.mode==='repair');show('#win',st.done);show('#clock',s);show('#o2',s);
+ lvl();
+ if(s&&!st.done&&st.mode==='play')render();
+ if(s&&!st.done&&st.mode==='repair')renderRep();
+ if(st.done){const T=TEAMS[st.team];$('#wt').textContent='Gerettet, '+(st.name||'Crew')+'!';
+  $('#cap').innerHTML=`<h2>🛸 Rettungskapsel ${T[2]}</h2><p>Die Kapsel öffnet sich. An Bord: <b>${T[3]}</b>. Gerettet!</p><p>KOSMOS-4 fliegt wieder sicher.</p>`;
+  $('#ws').textContent='⏱ '+fmt(st.time)+' · falsche Codes: '+st.wrongs}
+}
+setInterval(()=>{if(st.t0&&!st.done){const s=Math.floor((Date.now()-st.t0)/1000);$('#clock').textContent='⏱ '+fmt(s);const o=Math.max(5,Math.round(100-s/1200*95));$('#o2').textContent='O₂ '+o+'%';$('#o2').classList.toggle('lowo',o<35)}},500);
+
+/* ---------- Intro ---------- */
+const L=[['> KOSMOS-4: Verbindung wird aufgebaut ...',''],['> WARNUNG: Fremdzugriff erkannt','a'],['> Bordcomputer: ÜBERNOMMEN','a'],['> Eingehende Nachricht von V0ID:',''],['„Ich habe die Raumstation übernommen. Die Rettungskapsel ist verriegelt. Der Notfallcode hat 10 Ziffern. Gebt ihr dreimal einen falschen Code ein, dann stürzt KOSMOS-4 ab.“','r'],['> Der Sauerstoff wird knapp. Beeilt euch, Crew!','a']];
+let li=0;
+function next(){if(st.t0>0)return;const t=$('#term');if(li>=L.length){$('#ask').classList.remove('hide');return}
+ const d=document.createElement('div');d.className='l '+L[li][1];d.textContent=L[li][0];d.style.animationDelay=(-Math.random()*4)+'s';t.appendChild(d);sfx.crack();li++;if(li===2||li===4||li===6)gLines(4);setTimeout(next,1000)}
+$('#tap').onclick=function(){this.remove();gLines(6);next()};
+$('#teams').innerHTML=TEAMS.map((t,i)=>`<button data-i="${i}" style="margin:6px 6px 0 0">${t[0]} ${t[1]}</button>`).join('');
+$('#teams').onclick=e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.i;
+ Object.assign(st,{team:i,name:TEAMS[i][1],t0:Date.now(),tries:MAX,wrongs:0,done:false,time:0,mode:'play',ans:Array(10).fill(''),sent:Array(10).fill(false),rq:null,rn:0,msg:''});
+ save();const dl=sfx.intro();sfx.race(st.t0,dl);view()};
+document.addEventListener('click',()=>{sfx.start();if(st.t0>0&&!st.done){sfx.setBoost(st.mode==='repair'?30:0);sfx.race(st.t0)}$('#snd').classList.remove('hide')},{once:true});
+$('#snd').onclick=e=>{e.stopPropagation();$('#snd').textContent=sfx.toggle()?'🔊':'🔇'};
+setInterval(()=>{if(st.t0>0)return;const e=Math.random()<.5?$('#h'):$('#term');e.classList.add('gt');setTimeout(()=>e.classList.remove('gt'),150)},3000);
+let ct;$('#h').onclick=()=>{clearTimeout(ct);ct=setTimeout(()=>clicks=0,3000);if(++clicks>=5){clicks=0;try{localStorage.removeItem(KEY)}catch(e){}location.reload()}};
+
+/* ---------- Sound: Spannungsmusik (WebAudio) ---------- */
+const sfx=(()=>{let c,mg,dg,on=true,run=false,tmr,beat=0,nt=0,t0=0,bump=0,boost=0,drone=false;
+ const init=()=>{if(c)return c;const A=window.AudioContext||window.webkitAudioContext;if(!A)return null;c=new A();mg=c.createGain();mg.gain.value=.9;mg.connect(c.destination);return c};
+ const tone=(f,d,v,type,t,f2,lp)=>{if(!c||!on)return;const o=c.createOscillator(),g=c.createGain();let n=o;o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);if(lp){n=c.createBiquadFilter();n.type='lowpass';n.frequency.value=lp;o.connect(n)}n.connect(g);g.connect(mg);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.start(t);o.stop(t+d+.05)};
+ const noise=(d,v,t,fq)=>{if(!c||!on)return;const n=c.sampleRate*d|0,b=c.createBuffer(1,n,c.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=Math.random()*2-1;const s=c.createBufferSource(),g=c.createGain(),h=c.createBiquadFilter();h.type='bandpass';h.frequency.value=fq||1800;s.buffer=b;s.connect(h);h.connect(g);g.connect(mg);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.start(t)};
+ const bpm=()=>Math.min(150,84+Math.min(1.3,(Date.now()-t0)/1000/900)*56+bump+boost);
+ const B=[55,0,55,0,58.27,0,55,0,55,0,77.78,0,58.27,0,55,65.41];
+ const sched=()=>{while(nt<c.currentTime+.2){const b=beat%16,s=30/bpm(),e=Math.min(1.3,(Date.now()-t0)/1000/900);
+  if(on){
+   if(b===0||b===3||b===8||b===11)tone(b%8===0?70:58,.3,.24,'sine',nt,34);
+   if(B[b])tone(B[b],s*1.6,.05,'sawtooth',nt,0,380);
+   if(b%2===1)tone(4200,.02,.012,'square',nt);
+   if(b===6||b===14)noise(.05,.02+e*.03,nt,6000);
+   if(beat%32===0){tone(1760,1.6,.04,'sine',nt);tone(1760,1.6,.02,'sine',nt+.4)}
+   if(beat%64===48){tone(466,1.4,.03,'triangle',nt);tone(440,1.4,.03,'triangle',nt)}
+   if((e>.25||boost)&&b%2===0)tone([220,233,220,311][(b>>1)%4],s*.8,.012+e*.012,'triangle',nt,0,1500)
+  }
+  nt+=s;beat++}};
+ return{
+  start(){const x=init();if(!x)return;x.resume&&x.resume();if(!drone){drone=true;dg=c.createGain();dg.gain.value=.05;dg.connect(mg);const lp=c.createBiquadFilter();lp.type='lowpass';lp.frequency.value=240;lp.connect(dg);[55,55.4,77.8].forEach(f=>{const o=c.createOscillator();o.type='sawtooth';o.frequency.value=f;o.connect(lp);o.start()});const lf=c.createOscillator(),lg=c.createGain();lf.frequency.value=.15;lg.gain.value=60;lf.connect(lg);lg.connect(lp.frequency);lf.start()}},
+  intro(){if(!c||!on)return 0;const T=c.currentTime+.1;for(let i=0;i<24;i++)noise(.12,.02+i*.006,T+i*.13,800+i*250);tone(60,1.6,.35,'sine',T+3.2,26);noise(.8,.2,T+3.2,300);return 3.4},
+  race(t,dl){if(!c||run)return;run=true;t0=t||Date.now();nt=c.currentTime+.1+(dl||0);beat=0;tmr=setInterval(sched,40)},
+  halt(){run=false;clearInterval(tmr)},
+  setBoost(v){boost=v},
+  crack(){if(c&&on)tone(700,.04,.03,'sine',c.currentTime)},
+  ping(){if(!c||!on)return;const t=c.currentTime;tone(880,.12,.05,'sine',t);tone(1320,.2,.04,'sine',t+.08)},
+  wrong(){if(!c)return;bump+=8;const t=c.currentTime;tone(130,.6,.2,'sawtooth',t,55,500);noise(.35,.14,t,900)},
+  alarm(){if(!c||!on)return;const t=c.currentTime;for(let i=0;i<14;i++)tone(i%2?560:820,.5,.13,'sawtooth',t+i*.5,i%2?820:560,1100);for(let i=0;i<40;i++)noise(.06,.09,t+i*.17,1200+Math.random()*3000);tone(50,3,.4,'sine',t,22)},
+  bad(){if(!c||!on)return;tone(160,.3,.15,'square',c.currentTime,90,500)},
+  ok(){if(!c||!on)return;const t=c.currentTime;[392,523,659].forEach((f,i)=>tone(f,.25,.1,'triangle',t+i*.1))},
+  fix(){if(!c||!on)return;const t=c.currentTime;[262,330,392,523,659,784].forEach((f,i)=>tone(f,.45,.1,'triangle',t+i*.55));noise(.6,.1,t,500)},
+  win(){this.halt();if(!c||!on)return;const t=c.currentTime;[523,659,784,1047,1319].forEach((f,i)=>tone(f,.5,.12,'triangle',t+i*.14));tone(1568,1.2,.07,'sine',t+.8);if(dg)dg.gain.value=0},
+  toggle(){on=!on;if(dg)dg.gain.value=on?.05:0;return on}}})();
+view();
+</script></body></html>
